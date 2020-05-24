@@ -1,0 +1,47 @@
+--- Retourne le nom des équipes et le nombre de joueurs par équipe, le tout classé par nombre de joueurs par équipe,
+de la plus nombreuse à la moins nombreuse. ---
+
+mysql> SELECT name, COUNT(*) AS nb_player
+    -> FROM player
+    -> JOIN team ON team.id = player.team_id
+    -> GROUP BY name
+    -> ORDER BY nb_player DESC;
++------------+-----------+
+| name       | nb_player |
++------------+-----------+
+| Gryffindor |        36 |
+| Slytherin  |        21 |
+| Ravenclaw  |        15 |
+| Hufflepuff |        12 |
++------------+-----------+
+4 rows in set (0,00 sec)
+
+
+
+--- Retourne uniquement les noms des équipes complètes (ayant 14 joueurs ou plus, c’est-à- dire 7 joueurs 
+et 7 remplaçants minimum), classés par ordre alphabétique.---
+
+mysql> SELECT name, COUNT(*) AS nb_player
+    -> FROM player
+    -> JOIN team ON team.id = player.team_id
+    -> GROUP BY name
+    -> HAVING nb_player >=14
+    -> ORDER BY name ASC;
++------------+-----------+
+| name       | nb_player |
++------------+-----------+
+| Gryffindor |        36 |
+| Ravenclaw  |        15 |
+| Slytherin  |        21 |
++------------+-----------+
+3 rows in set (0,00 sec)
+
+
+
+
+---  Retourne la liste des joueurs de son équipe (Gryffundor) qui ont été enrôlés un lundi (il souhaite les faire jouer en priorité),
+et classe les résultats par date d’enrôlement chronologique.---
+
+
+
+
