@@ -43,5 +43,26 @@ mysql> SELECT name, COUNT(*) AS nb_player
 et classe les résultats par date d’enrôlement chronologique.---
 
 
+mysql> SELECT firstname, lastname, name, enrollment_date, DATE_FORMAT(enrollment_date, "%W") AS enrollment_day
+    -> FROM wizard
+    -> JOIN player on player.id= wizard.id
+    -> JOIN team ON team.id =player.team_id
+    -> WHERE name= "Gryffindor"
+    -> HAVING enrollment_day = "Monday"
+    -> ORDER BY enrollment_date ASC;
++-----------+------------+------------+-----------------+----------------+
+| firstname | lastname   | name       | enrollment_date | enrollment_day |
++-----------+------------+------------+-----------------+----------------+
+| George    | Weasley    | Gryffindor | 1991-08-26      | Monday         |
+| Alice     | Longbottom | Gryffindor | 1992-02-17      | Monday         |
+| Cadogan   |            | Gryffindor | 1993-01-04      | Monday         |
+| Godric    | Gryffindor | Gryffindor | 1993-08-30      | Monday         |
+| Sirius    | Black      | Gryffindor | 1994-01-10      | Monday         |
+| Aberforth | Dumbledore | Gryffindor | 1995-04-24      | Monday         |
+| Augusta   | Longbottom | Gryffindor | 1999-10-25      | Monday         |
++-----------+------------+------------+-----------------+----------------+
+7 rows in set (0,00 sec)
+
+
 
 
